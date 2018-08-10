@@ -1,0 +1,56 @@
+.include "./m328Pdef.inc"
+main:
+ldi r16,0b000011111;numero a
+ldi r17,0b000010001;numero b
+ldi r18,0b00000000;para guardar el signo del numero 1
+ldi r19,0b00000000;para guardar el signo del numero 2
+
+bst r16,4; envio bit 5 a  bandera t
+bld r18,0;copio bit de t a r18 en la posicion 0
+bst r17,4;""
+bld r19,0;""
+
+bst r18,6;vuelvo 0 los bits 5
+bld r16,4;vuelvo 0 los bits
+bld r17,4;vuelvo 0 los bits 5
+
+cp r18,r19;son iguales los signos?
+breq caso1;si son iguales  salto al caso1:
+cp r16,r17;comparo cual es mayor sin el signo
+brlo caso2;si r16 es menor entro al caso 2
+neg r17
+add r16,r17
+bst r18,0
+bld r16,4
+out DDRB,r16
+out PortB,r16
+rjmp done
+
+caso1:; signos iguales
+add r16,r17;sumo
+bst r16,4;envio el bit 4 a t
+bld r16,5;de t lo envio a el bit 5 para llevar el acarreo
+bst r18,0;pido un signo
+bld r16,4;le coloco a la suma el signo
+out DDRB,r16
+out PortB,r16
+rjmp done
+done:
+rjmp start
+
+caso2:
+neg r16;complemento al menor
+add r17,r16;lo resto
+bst r19,0;pido el signo del r17 que es el mayor
+bld r17,4;pongo el signo en el bit 5 o 4 si contamos desde 0
+out DDRB,r17
+out PortB,r17
+rjmp done
+
+start:
+rjmp start
+
+
+
+
+
