@@ -1,4 +1,8 @@
 .include "./m328Pdef.inc"
+;Alexis García Ramírez
+;Daniel Lopez Gaviria
+;Luis Felipe Montoya
+
 Inicio:
 ldi r16,0b00011111; Registro R16 número uno
 ldi r17,0b00011011;	Registro R17 número dos
