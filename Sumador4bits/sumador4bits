@@ -1,3 +1,8 @@
+;Kevin Alexander Ibarra Orozco
+;Jeisson Harvey Barrera Sanchez
+;Mateo Zuluaga Loaiza
+
+
 .include "./m328Pdef.inc"
 main:
 ldi r16,0b000011111;numero a
